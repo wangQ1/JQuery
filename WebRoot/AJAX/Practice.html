@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript" src="jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			var inputIp = $("#a").val();
+			$("#a").focusin(function(){
+				if(inputIp == $("#a").val()){
+					//this获取的是dom元素 转化成jquery对象
+					$(this).val("");
+				}
+			});
+			$("#a").focusout(function(){
+				if($("#a").val() == ""){
+					$(this).val(inputIp);
+				}
+			});
+			$("#b").click(function(){
+				var ip = $("#a").val();
+				var url = "http://restapi.amap.com/v3/ip?key=546183916ecdca27374f7e76b8fcc2e0&ip=" + ip;
+				$.ajax({
+					type:"GET",//指定请求的方法类型
+					url: url,//资源唯一标识符
+					dataType:"json",//指定返回的数据类型
+					success: function(msg){//请求响应的回调函数，参数1就是返回的json数据
+				    	var province = msg.province;
+				    	var city = msg.city;
+				    	if(province == null || province == ""){
+				    		alert("ip不存在或格式错误");
+				    	}else{
+				    		alert("所在的城市为:" + province + " " + city);
+				    	}
+				    },
+				    error: function(XMLHttpRequest, textStatus, errorThrown){
+				    	// 通常 textStatus 和 errorThrown 之中 只有一个会包含信息
+    					this; // 调用本次AJAX请求时传递的options参数
+				    }
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<input type="text" id="a" value="输入ip地址"/>
+	<input type="button" id="b" value="查询"/>
+</body>
+</html>

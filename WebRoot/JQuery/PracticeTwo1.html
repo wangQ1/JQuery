@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript" src="jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$("#aa").hover(
+  				function () {//当鼠标移动到一个匹配的元素上面时   调用该函数
+    				$("div").css("display", "block");
+			        $(document).mousemove(function(event){
+			            $("div").css("top", event.pageY + 5);
+			            $("div").css("left", event.pageX + 5);
+			    	});
+  				},
+  				function () {//当鼠标移出这个元素时   调用该函数
+    				$("div").css("display", "none");
+ 				}
+ 			);
+		});
+	</script>
+</head>
+<body>
+	<a href="http://www.taobao.com" id="aa">淘宝</a>
+	<div style="display: none; position: absolute;"><img src="taobao.png"></div>
+</body>
+</html>

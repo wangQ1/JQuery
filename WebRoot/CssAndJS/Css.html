@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<style type="text/css">
+		/*标签选择器*/
+		div{
+			color: red;
+		}
+		/*id选择器*/
+		#a{
+			color: blue;
+		}
+		/*class选择器*/
+		.b{
+			color: green;
+		}
+		p[a="he"]{
+			color:red;
+		}
+		a{
+			text-decoration: none;
+		}
+		a:hover {/*鼠标覆盖触发事件*/
+			text-decoration: underline;
+			color: red;
+		}
+	</style>
+	<!-- document   window的内置对象 -->
+	<script type="text/javascript">
+		window.onload = function(){//加载完所有内容给后调用函数 -->
+			var a = document.getElementById("name");
+			a.value="wang";//动态赋值
+			document.getElementsByTagName("form")[0].removeChild(a);//获取标签,删除子元素
+			var myInput=document.createElement("input");//创建一个新标签
+			myInput.value="hello";
+			document.getElementById("myDiv").appendChild(myInput);//万能的追加语句
+			//document.getElementById("myDiv").innerHTML="<font color=red>hello</font>";只支持div和span,会覆盖当前标签中的所有内容
+			alert(a);
+		};
+		function loadReady(){
+			var a = document.getElementById("name");//ByName通过名字获取，需要下标， ByTagName通过标签名获取，需要下标
+			document.getElementsByTagName("form")[0].removeChild(a);
+			//removeChild(a)删除子元素, appendChild()追加子元素
+			alert(a);
+		};
+	</script>
+</head>
+<body>   <!-- onload="loadReady()" 加载完所有内容给后调用函数 -->
+	<div id="a">div</div>
+	<span class="b">span</span>
+	<p aa="he">ppppp</p>
+	<a href="http://www.baidu.com">百度</a>
+	<form>
+		用户名:<input type="text" id="name"/>
+		密码:<input type="text" id="name"/>
+		性别:<input type="text" id="name"/>
+		年龄:<input type="text" id="name"/>
+	</form>
+	<div id="myDiv" style="border: 1px solid black;width:100px;height:100px">
+		<font color=green>hello</font>
+	</div>
+</body>
+</html>

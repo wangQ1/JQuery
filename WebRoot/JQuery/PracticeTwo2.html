@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript" src="jquery-3.2.1.js"></script>
+	<script type="text/javascript">
+		/*
+		$(function(){直接显示或隐藏所有匹配的元素
+			$("#a").click(function(){
+				$("div").show();//方法中封装了css 属性display: block
+			});
+			$("#b").click(function(){
+				$("div").hide();//方法中封装了css 属性display: none
+			});
+		});
+		*/
+		/*
+		$(function(){//滑动效果，通过高度变化来动态地显示或隐藏所有匹配的元素
+			$("#a").click(function(){
+				//使用三种预定速度之一的字符串("slow", "normal", "fast")或自定义表示动画时长的毫秒数值(如：1000)
+				$("div").slideDown("slow");
+			});
+			$("#b").click(function(){
+				$("div").slideUp("fast");
+			});
+		});
+		*/
+		$(function(){//淡入淡出效果，通过透明度变化来动态地显示或隐藏所有匹配的元素
+			$("#a").click(function(){
+				//使用三种预定速度之一的字符串("slow", "normal", "fast")或自定义表示动画时长的毫秒数值(如：1000)
+				$("div").fadeIn(5000);
+			});
+			$("#b").click(function(){
+				$("div").fadeOut(5000);
+			});
+		});
+	</script>
+</head>
+<body>
+	<input type="button" id="a" value="显示">
+	<input type="button" id="b" value="隐藏">
+	<div><img src="taobao.png"></div>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript" src="jquery-3.2.1.js"></script><!-- 引入JQuery库 -->
+	<script type="text/javascript">
+		//=================第一题===================
+		/*$(function(){
+			$("p").click(function(){
+				alert($(this).text());
+			});
+		});*/
+		//=================第二题===================
+		/*$(function(){
+			$("tr:even:not([id='hh'])").css("color", "red");
+		});*/
+		//=================第三题===================
+		/*$(function(){
+			$("input[value='确定']").click(function(){
+				alert("你选择的个数为：" + $(":checkbox:checked").length);
+			});
+		});*/
+		//=================第四题===================
+		$(function(){
+			var address = $("input[name='address']").val();
+			var password = $("input[name='password']").val();
+			$("input[name='address']").focusin(function(){
+				if(address == $("input[name='address']").val()){
+					//this获取的是dom元素 转化成jquery对象
+					$(this).val("");
+				}
+			});
+			$("input[name='address']").focusout(function(){
+				if($("input[name='address']").val() == ""){
+					$(this).val(address);
+				}
+			});
+			$("input[name='password']").focusin(function(){
+				if(password == $("input[name='password']").val()){
+					$(this).val("");
+				}
+			});
+			$("input[name='password']").focusout(function(){
+				if($("input[name='password']").val() == ""){
+					$(this).val(password);
+				}
+			});
+		});
+		//=================第五题===================
+		$(function(){//使单选下拉框中的'选择3号'被选中
+			$("#a").click(function(){
+				$("#single").val("c");//带有value属性时使用value属性的值，否则使用文本值
+			});
+		});
+		$(function(){//使多选下拉框中的'选择2号'和'选择5号'被选中
+			$("#b").click(function(){
+				$("#multi").val(["mb", "me"]);//带有value属性时使用value属性的值，否则使用文本值
+			});
+		});
+		$(function(){//使多选框中的'多选2'和'多选4'被选中
+			$("#c").click(function(){
+				$("input[name='duo']").val(["cb", "cd"]);//带有value属性时使用value属性的值，否则使用文本值
+			});
+		});
+		$(function(){//使单选框中的'单选2'被选中
+			$("#d").click(function(){
+				$("input[name='dan']").val(["rb"]);//带有value属性时使用value属性的值，否则使用文本值
+			});
+		});
+		$(function(){//打印被选中的值
+			$("#e").click(function(){//带有value属性时使用value属性的值，否则使用文本值
+				$("select option:selected").each(function(index, i){
+					alert($(i).text());
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<p>这是段落1</p>
+	<p>这是段落2</p>
+	<p>这是段落3</p>
+	<table id="myTable">
+		<tr id="hh"><th>用户名</th><th>性别</th><th>年龄</th></tr>
+		<tr><td>小明</td><td>男</td><td>18</td></tr>
+		<tr><td>小红</td><td>女</td><td>18</td></tr>
+		<tr><td>小刚</td><td>男</td><td>18</td></tr>
+		<tr><td>小李</td><td>男</td><td>18</td></tr>
+		<tr><td>小赵</td><td>男</td><td>18</td></tr>
+	</table>
+	<input type="checkbox" name="0"/>篮球
+	<input type="checkbox" name="0"/>足球
+	<input type="checkbox" name="0"/>桌球
+	<input type="checkbox" name="0"/>地球
+	<input type="button" value="确定"><br>
+	<input type="text" name="address" value="请输入邮箱地址">
+	<input type="text" name="password" value="请输入邮箱密码"><br>
+	<input type="button" id="a" value="使单选下拉框中的'选择3号'被选中">
+	<input type="button" id="b" value="使多选下拉框中的'选择2号'和'选择5号'被选中"><br>
+	<input type="button" id="c" value="使多选框中的'多选2'和'多选4'被选中">
+	<input type="button" id="d" value="使单选框中的'单选2'被选中">
+	<input type="button" id="e" value="打印被选中的值"><br>
+	<select id="single">
+        <option></option>
+        <option value="a">选择1号</option>
+        <option value="b">选择2号</option>
+        <option value="c">选择3号</option>
+    </select>
+    <select id="multi" multiple="multiple">
+    <option value="ma">选择1号</option>  
+    <option value="mb">选择2号</option>
+    <option value="mc">选择3号</option> 
+    <option value="md">选择4号</option>
+    <option value="me">选择5号</option>
+	</select><br>
+	<input type="checkbox" name="duo" value="ca"/>多选1
+	<input type="checkbox" name="duo" value="cb"/>多选2
+	<input type="checkbox" name="duo" value="cc"/>多选3
+	<input type="checkbox" name="duo" value="cd"/>多选4
+	<input type="radio" name="dan" value="ra"/>单选1
+	<input type="radio" name="dan" value="rb"/>单选2
+	<input type="radio" name="dan" value="rc"/>单选3
+</body>
+</html>

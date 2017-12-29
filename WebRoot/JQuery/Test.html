@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<!-- JQuery方法特点：(大多数方法)带一个参数,表示获取该参数的值（取值）， 带两个参数，表示设置值（赋值） -->
+	<script type="text/javascript" src="jquery-3.2.1.js"></script><!-- 引入JQuery库 -->
+	<script type="text/javascript">
+		/*
+		//dom对象(标签对象 button anchor<a>  window document等   是属于javascript语言中的)
+		$(function(){//==$(document).ready(function(){});
+			var body = document.body;//获取body对象
+			alert(body);
+		});
+		*/
+//===================================================================================================
+		/*
+		//$()是JQuery的入口，其实就是一个函数，这个函数可以传入不同类型的参数(匿名函数，字符串)
+		//如果传入函数就是等同于window.onload=function(){}(dom元素初始化之后调用匿名函数)
+		$(function(){//==$(document).ready(function(){});
+			alert("jjjj");
+		});
+		*/
+//===================================================================================================
+		/*
+		//JQuery选择器  将满足选择器条件的dom元素封装成JQuery对象(简单来说就是一个包含了dom对象的数组)
+		$(function(){
+			var jQueryObj = $("input");//返回一个jQuery数组对象
+			//调用val方法获取值(不能调用js的方法和属性，只能调用内置的方法和属性)jQueryObj.value X
+			alert(jQueryObj.eq(0).val());//eq(0)获取jQueryObj数组对象中的第一个jQuery对象
+			//如果需要调用js的方法和属性， 需要将jquery对象转换成dom对象
+			var domObj = jQueryObj[1];//获取jQueryObj数组对象中第二个dom对象, 等同于jQueryObj.get(1)
+			alert(domObj.value);
+			var jqo = $(domObj); //将dom对象转换为jQuery对象
+			alert(jqo.val());
+		});
+		*/
+//===================================================================================================
+		/*
+		$(function(){
+			//alert($("input").eq(0).attr("type", "password"));//修改dom对象的属性值
+			//$("input").addClass("myClass");//为dom对象添加css内部样式等同于 class="myClass"
+			//$("input").eq(0).css("color", "yellow");//为dom对象添加css行内样式等同于  style="color: yellow"
+			alert($("#myDiv").html());//获取源代码, 设置值也是可以直接设置源代码
+			alert($("#myDiv").text());//获取内容, 设置值设置为文本
+			$("table").append("<tr><td>张三</td><td>男</td><td>20</td></tr>");//往后追加，可以直接追加源代码
+			$("table").prepend("<tr><td>李四</td><td>女</td><td>19</td></tr>");//往前追加
+		});
+		*/
+//=========================================事件处理===================================================
+		/*
+		$(function(){
+			$("input[name='a']").click(function(){//直接绑定
+				alert("点击了按钮1");
+			});
+			$("input[name='b']").bind("click", function(){//添加绑定事件
+				alert("点击了按钮2");
+				$("input[name='a']").unbind("click");//删除绑定的事件
+				alert("删除了按钮1的点击事件");
+			});
+			$("input[name='c']").one("click", function(){//添加绑定事件，该事件只会被触发一次.等同于$(this).attr("disabled", "disabled");
+				alert("点击了按钮3");
+			});
+		});
+		*/
+//==========================================事件传播==================================================
+		$(function(){
+			//非委派  相同的选择器 绑定的事件  后续添加的相同dom元素  不会绑定该事件
+			/*$("input[name='t']").click(function(){//直接绑定
+				alert("点击了按钮t");
+			});*/
+			$("input[name='create']").click(function(){//后续添加
+				$(document.body).append("<input type='button' name='t' value='按钮t'/>");
+			});
+			//事件委派  事件传播   所有符合选择器条件的dom元素都会添加该事件  live已过期
+		   $(document).on( "click", "input[name='t']", function(){
+		      alert("点击了按钮t");
+		   });
+		});
+	</script>
+	<style type="text/css">
+		.myClass{
+			color:red;
+		}
+	</style>
+</head>
+<body>
+	<input type="text" name="hh" value="123456"/>
+	<input type="text" name="hh" value="678543"/>
+	<input type="text" name="hh" value="183755"/>
+	<div id="myDiv">
+		<font color="red" id="one">这是一个div</font>
+		<font color="green" id="two">这是一个div</font>
+		<font color="blue" id="three">这是一个div</font>
+	</div>
+	<table>
+		<tr><th>姓名</th><th>性别</th><th>年龄</th></tr>
+	</table>
+	<input type="button" name="a" value="按钮1"/>
+	<input type="button" name="b" value="按钮2"/>
+	<input type="button" name="c" value="按钮3"/><br>
+	<input type="button" name="t" value="按钮t"/>
+	<input type="button" name="t" value="按钮t"/>
+	<input type="button" name="create" value="创建新按钮"/>
+</body>
+</html>

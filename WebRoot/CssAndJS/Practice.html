@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<script type="text/javascript">
+		window.onload = function(){
+			var table=document.getElementById("myTable");
+			var tr = table.getElementsByTagName("tr") ;
+			for(var i = 1; i < tr.length; i++){
+				if(i%2!=0){
+					tr[i].style.color = "red";//背景色backgroundColor
+				}else{
+					tr[i].style.color = "blue";//背景色backgroundColor
+				}
+			}
+		};
+		function choose(flag){
+	        var games = document.getElementsByName("0");
+	        if (flag == 1){
+	            for ( var i = 0; i < games.length; i++){
+	                games[i].checked = true;
+	            }
+	        }else if (flag == -1){
+	            for ( var i = 0; i < games.length; i++){
+	                games[i].checked = !games[i].checked;
+	            }
+	        }else if (flag == 0){
+	            for ( var i = 0; i < games.length; i++){
+	                games[i].checked = false;
+	            }
+	        }
+    	};
+	</script>
+</head>
+<body>
+	<table id="myTable">
+		<tr><th>用户名</th><th>性别</th><th>年龄</th></tr>
+		<tr><td>小明</td><td>男</td><td>18</td></tr>
+		<tr><td>小红</td><td>女</td><td>18</td></tr>
+		<tr><td>小刚</td><td>男</td><td>18</td></tr>
+		<tr><td>小李</td><td>男</td><td>18</td></tr>
+		<tr><td>小赵</td><td>男</td><td>18</td></tr>
+	</table>
+	<input type="checkbox" onclick="choose(1)"/>全选
+	<input type="checkbox" onclick="choose(-1)"/>反选
+	<input type="checkbox" onclick="choose(0)"/>全不选<br>
+	<input type="checkbox" name="0"/>篮球
+	<input type="checkbox" name="0"/>足球
+	<input type="checkbox" name="0"/>桌球
+</body>
+</html>

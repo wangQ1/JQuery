@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+	<!-- JQuery方法特点：(大多数方法)带一个参数,表示获取该参数的值（取值）， 带两个参数，表示设置值（赋值） -->
+	<script type="text/javascript" src="jquery-3.2.1.js"></script><!-- 引入JQuery库 -->
+	<script type="text/javascript">
+		//dom对象(标签对象 button anchor<a>  window document等   是属于javascript语言中的)
+		$(function(){//==$(document).ready(function(){});
+			var content = $("#a").val();
+			$("#a").focusin(function(){
+				if(content == $("#a").val()){
+					$("#a").val("");
+				}
+			});
+			$("#a").focusout(function(){
+				if("" == $("#a").val()){
+					$("#a").val(content);
+				}
+			});
+			$("#b").click(function(){
+				var city = $("#a").val();
+				var url="http://restapi.amap.com/v3/weather/weatherInfo?key=828f62c49e837f091031ecd12e3d6fc3&city=" + city;
+				//ajax()是$对象的一个静态方法
+				//调用get或post  $.get(url, 参数, 回调函数, 返回数据类型);
+				$.ajax({
+					type: "GET",//请求方式 ("POST" 或 "GET")， 默认为 "GET"。注意：其它 HTTP 请求方法，如 PUT 和 DELETE 也可以使用，但仅部分浏览器支持。
+								//使用post请求时    url上的参数 必须使用data键值对传递 如：
+								//data:"key=828f62c49e837f091031ecd12e3d6fc3&city=" + city;
+				    url: url,
+				    dataType: "json",//将返回的字符串转换成指定的数据类型
+				    success: function(msg){//请求响应的回调函数，参数1就是返回的json数据
+				    	var weather = msg.lives[0].weather;
+				    	$("div").remove();
+				        if(weather == "多云"){
+				        	$(document.body).append("<div><img src='cloudy.jpg'/></div>");
+				        }else{
+				        	$(document.body).append("<div><img src='sun.jpg'/></div>");
+				        }
+				    }
+				});
+			});
+			var ar = [{id:1, name:'zs'}, {id:2, name:'ls'}];
+			$.each(ar, function(index, value){//each循环    匿名函数中的参数1为下标，参数2为值 
+				alert(index + "----" + value.name);
+			});
+			//$("input").each(function(index, value){
+				//alert(value.value;);
+			//});
+			var param = $("form").serialize();//将form表单中的所有参数拼接
+			alert(param);
+			//扩展jQuery对象本身。 用来在jQuery命名空间上增加新函数。
+			$.extend({
+				sum: function(p1, p2){
+					return p1+p2;
+				}
+			});
+			alert($.sum(10, 20));
+			//为jQuery元素集扩展新的方法（通常用来制作插件）。
+			$.fn.extend({
+				get: function(){
+					//this在此代表jquery对象
+					return this.val();//this[0]转换为dom对象
+				}
+			});
+			alert($("input[name='address']").get());
+		});
+	</script>
+</head>
+<body>
+	<input type="text" id="a" value="输入城市名称"/>
+	<input type="button" id="b" value="查询"/>
+	<form>
+		用户名<input type="text" name="uName" value="zs"/>
+		邮箱<input type="text" name="mail" value="asd@qq.com"/>
+		性别<input type="text" name="sex" value="1"/>
+		年龄<input type="text" name="age" value="20"/>
+		住址<input type="text" name="address" value="szs"/>
+	</form>
+</body>
+</html>
